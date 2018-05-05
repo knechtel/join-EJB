@@ -13,9 +13,18 @@ public class PessoaJpaController implements PessoaJpaControllerRemote {
 	@PersistenceContext(unitName = "join-EJBPU")
 	private EntityManager em;
 
-	public void create(Pessoa pessoa) {
-		em.persist(pessoa);
+	public Pessoa create(Pessoa pessoa) {
+		if (pessoa.getId() == null) {
+			em.persist(pessoa);
+			em.flush();
+		}
+		return pessoa;
+	}
+
+	public void merge(Pessoa pessoa) {
+		em.merge(pessoa);
 		em.flush();
+
 	}
 
 }

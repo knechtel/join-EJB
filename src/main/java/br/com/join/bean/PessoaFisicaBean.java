@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
@@ -12,7 +13,7 @@ import br.com.join.entity.PessoaFisica;
 import br.com.join.jpaController.PessoaFisicaJpaControllerRemote;
 import br.com.join.jpaController.PessoaJpaControllerRemote;
 
-@SessionScoped
+@RequestScoped
 @Named("pessoaFisicaBean")
 public class PessoaFisicaBean implements Serializable {
 
@@ -32,6 +33,7 @@ public class PessoaFisicaBean implements Serializable {
 	public void init() {
 		pessoa = new Pessoa();
 		pessoaFisica = new PessoaFisica();
+
 	}
 	
 	public Pessoa getPessoa() {
@@ -51,9 +53,11 @@ public class PessoaFisicaBean implements Serializable {
 	public String create() {
 		pessoaJpa.create(pessoa);
 		pessoaFisica.setPessoa(pessoa);
-		
 		pessoaFisicaJpa.create(pessoaFisica);
-		return null;
+		
+		
+		
+		return "/success.xhtml";
 	}
 	
 	

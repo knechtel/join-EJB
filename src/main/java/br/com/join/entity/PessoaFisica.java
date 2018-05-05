@@ -9,13 +9,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 
 @Entity
+@NamedQueries({ @NamedQuery(name = "PessoaFisica.findAll", query = "SELECT p FROM PessoaFisica p") })
 @Table(name = "pessoaFisica")
 public class PessoaFisica implements Serializable {
 	
@@ -26,16 +33,14 @@ public class PessoaFisica implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@OneToOne
+	@OneToOne 
+	@MapsId
 	private Pessoa pessoa;
 	private String cpf;
 	
-	@JoinTable(name = "dependentes", 
-			joinColumns = { @JoinColumn(name = "pessoaFisica_id", referencedColumnName = "id") 
-	}, inverseJoinColumns = {
-			@JoinColumn(name = "pessoa_id", referencedColumnName = "id") })
-	@ManyToMany(fetch = FetchType.LAZY)
-	private List<Pessoa> listDependente;
+
+	@OneToMany(fetch = FetchType.LAZY)
+	private List<Dependente> listDependente;
 	public Integer getId() {
 		return id;
 	}
@@ -54,6 +59,12 @@ public class PessoaFisica implements Serializable {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	
+	public List<Dependente> getListDependente() {
+		return listDependente;
+	}
+	public void setListDependente(List<Dependente> listDependente) {
+		this.listDependente = listDependente;
+	}
+
 
 }
