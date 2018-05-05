@@ -6,16 +6,17 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import br.com.join.entity.Dependente;
-import br.com.join.entity.Pessoa;
 import br.com.join.entity.PessoaFisica;
 import br.com.join.jpaController.DependenteJpaControllerRemote;
 import br.com.join.jpaController.PessoaFisicaJpaControllerRemote;
-@RequestScoped
+
+@SessionScoped
 @Named("dependenteBean")
-public class DependenteBean implements Serializable{
+public class DependenteBean implements Serializable {
 
 	/**
 	 * 
@@ -27,16 +28,19 @@ public class DependenteBean implements Serializable{
 	private Dependente dependente;
 	@EJB
 	private DependenteJpaControllerRemote dependenteJpa;
-	
-	
+	private List<Dependente> listDependente;
+
 	private Integer idPessoaFisica;
+	
+	private Dependente selectDependente;
 
 	@PostConstruct
 	public void init() {
 		dependente = new Dependente();
 		listPessoaFisica = pessoaFisicaJpa.findAll();
-
+		listDependente = dependenteJpa.findAll();
 	}
+
 	public Dependente getDependente() {
 		return dependente;
 	}
@@ -52,22 +56,48 @@ public class DependenteBean implements Serializable{
 	public void setListPessoaFisica(List<PessoaFisica> listPessoaFisica) {
 		this.listPessoaFisica = listPessoaFisica;
 	}
-	
-	
+
+	public List<Dependente> getListDependente() {
+		return listDependente;
+	}
+
+	public void setListDependente(List<Dependente> listDependente) {
+		this.listDependente = listDependente;
+	}
 
 	public Integer getIdPessoaFisica() {
 		return idPessoaFisica;
 	}
+
 	public void setIdPessoaFisica(Integer idPessoaFisica) {
 		this.idPessoaFisica = idPessoaFisica;
 	}
+	
+	public String update() {
+		return null;
+	}
+
 	public String create() {
-		System.out.println("verifica = "+ idPessoaFisica);
 		PessoaFisica pessoaFisica = pessoaFisicaJpa.findById(idPessoaFisica);
 		dependente.setPessoaFisica(pessoaFisica);
 		dependenteJpa.create(dependente);
-		
-		return "/success.xhtml";
+		listDependente.add(dependente);
+		dependente = new Dependente();
+		return null;
 	}
+	public String edit() {
+		return null;
+	}
+
+	public Dependente getSelectDependente() {
+		return selectDependente;
+	}
+
+	public void setSelectDependente(Dependente selectDependente) {
+		System.out.println("dependente "+selectDependente.getNomeDependente());
+		this.selectDependente = selectDependente;
+	}
+	
+	
 
 }

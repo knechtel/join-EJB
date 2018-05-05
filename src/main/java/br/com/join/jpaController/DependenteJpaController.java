@@ -1,11 +1,14 @@
 package br.com.join.jpaController;
 
+import java.util.List;
+
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import br.com.join.entity.Dependente;
+import br.com.join.entity.PessoaFisica;
 
 @Stateless
 @Remote(DependenteJpaControllerRemote.class)
@@ -24,6 +27,13 @@ public class DependenteJpaController implements DependenteJpaControllerRemote {
 	public Dependente findById(Integer id) {
 
 		return em.find(Dependente.class, id);
+
+	}
+
+	@Override
+	public List<Dependente> findAll() {
+		List<Dependente> listDependente = em.createNamedQuery("Dependente.findAll", Dependente.class).getResultList();
+		return listDependente;
 
 	}
 }

@@ -17,4 +17,6 @@ public class PessoaJuridicaJpaController implements PessoaJuridicaJpaControllerR
 		em.persist(pessoaJuridica);
 		return pessoaJuridica;
 	}
+	
+	
 }
