@@ -7,7 +7,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import br.com.join.entity.Dependente;
 import br.com.join.entity.PessoaFisica;
 
 @Stateless
@@ -39,6 +38,10 @@ public class PessoaFisicaJpaController implements PessoaFisicaJpaControllerRemot
 
 		return em.find(PessoaFisica.class, id);
 
+	}
+
+	public PessoaFisica find(PessoaFisica pessoaFisica) {
+		return null;
 	}
 
 }

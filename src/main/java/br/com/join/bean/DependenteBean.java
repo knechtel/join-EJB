@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
@@ -31,7 +30,7 @@ public class DependenteBean implements Serializable {
 	private List<Dependente> listDependente;
 
 	private Integer idPessoaFisica;
-	
+
 	private Dependente selectDependente;
 
 	@PostConstruct
@@ -73,8 +72,18 @@ public class DependenteBean implements Serializable {
 		this.idPessoaFisica = idPessoaFisica;
 	}
 	
-	public String update() {
-		return null;
+	public String doEdit(Dependente dependente) {
+		System.out.println("nome = "+dependente.getNomeDependente());
+		this.dependente=dependente;
+		return"/editDependente.xhtml";
+	}
+
+	public String edit() {
+		listDependente.remove(dependente);
+		dependente = dependenteJpa.merge(dependente);
+		listDependente.add(dependente);
+		dependente = new Dependente();
+		return "/success.xhtml";
 	}
 
 	public String create() {
@@ -85,19 +94,16 @@ public class DependenteBean implements Serializable {
 		dependente = new Dependente();
 		return null;
 	}
-	public String edit() {
-		return null;
-	}
+
+	
 
 	public Dependente getSelectDependente() {
 		return selectDependente;
 	}
 
 	public void setSelectDependente(Dependente selectDependente) {
-		System.out.println("dependente "+selectDependente.getNomeDependente());
+		System.out.println("dependente " + selectDependente.getNomeDependente());
 		this.selectDependente = selectDependente;
 	}
-	
-	
 
 }

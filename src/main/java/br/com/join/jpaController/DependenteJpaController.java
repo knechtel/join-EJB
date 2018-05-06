@@ -36,4 +36,12 @@ public class DependenteJpaController implements DependenteJpaControllerRemote {
 		return listDependente;
 
 	}
+	
+	public Dependente merge(Dependente dependente) {
+
+		em.merge(dependente);
+		em.flush();
+
+		return dependente;
+	}
 }

@@ -12,4 +12,6 @@ public interface PessoaFisicaJpaControllerRemote {
 	public List<PessoaFisica> findAll();
 	
 	public PessoaFisica findById(Integer id);
+	
+	public PessoaFisica find(PessoaFisica pessoaFisica);
 }

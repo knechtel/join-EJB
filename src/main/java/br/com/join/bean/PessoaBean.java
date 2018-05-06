@@ -61,4 +61,7 @@ public class PessoaBean implements Serializable {
 	public String doCadJuridica() {
 		return "/cadPJuridica.xhtml";
 	}
+	public String doRelatorio() {
+		return "/test.xhtml";
+	}
 }

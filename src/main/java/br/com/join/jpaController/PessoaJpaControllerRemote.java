@@ -7,7 +7,8 @@ public interface PessoaJpaControllerRemote {
 
 	public  Pessoa create(Pessoa pessoa);
 	
-	public void merge(Pessoa pessoa);
-		
+	public Pessoa merge(Pessoa pessoa);
+
+	public Pessoa findById(Integer id) ;
 	
 }

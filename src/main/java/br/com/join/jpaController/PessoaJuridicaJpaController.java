@@ -1,4 +1,7 @@
+
 package br.com.join.jpaController;
+
+import java.util.List;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -15,6 +18,18 @@ public class PessoaJuridicaJpaController implements PessoaJuridicaJpaControllerR
 	
 	public PessoaJuridica create(PessoaJuridica pessoaJuridica) {
 		em.persist(pessoaJuridica);
+		return pessoaJuridica;
+	}
+
+	@Override
+	public List<PessoaJuridica> findAll() {
+		List<PessoaJuridica> listDependente = em.createNamedQuery("PessoaJuridica.findAll", PessoaJuridica.class).getResultList();
+		return listDependente;
+	}
+
+	@Override
+	public PessoaJuridica merge(PessoaJuridica pessoaJuridica) {
+		em.merge(pessoaJuridica);
 		return pessoaJuridica;
 	}
 	
