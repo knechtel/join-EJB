@@ -106,6 +106,8 @@ public class PessoaJuridicaBean implements Serializable {
 	}
 	
 	public String deleteAction(PessoaJuridica pessoaJuridica) {
+		listPessoaJuridica.remove(pessoaJuridica);
+		pessoaJpaJuridica.delete(pessoaJuridica);
 		return null;
 	}
 	

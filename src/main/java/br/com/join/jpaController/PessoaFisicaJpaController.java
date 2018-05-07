@@ -44,4 +44,12 @@ public class PessoaFisicaJpaController implements PessoaFisicaJpaControllerRemot
 		return null;
 	}
 
+	@Override
+	public void delete(PessoaFisica pessoaFisica) {
+		em.createQuery("DELETE FROM PessoaFisica e WHERE id=" + pessoaFisica.getId()).executeUpdate();
+		if (em.contains(pessoaFisica)){
+		     em.remove(pessoaFisica);
+		}
+	}
+
 }

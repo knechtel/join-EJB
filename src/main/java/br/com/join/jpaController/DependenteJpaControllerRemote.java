@@ -13,4 +13,6 @@ public interface DependenteJpaControllerRemote {
 	public List<Dependente> findAll();
 	
 	public Dependente merge(Dependente dependente);
+	
+	public void delete(Dependente dependente);
 }

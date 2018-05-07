@@ -32,6 +32,15 @@ public class PessoaJuridicaJpaController implements PessoaJuridicaJpaControllerR
 		em.merge(pessoaJuridica);
 		return pessoaJuridica;
 	}
+
+	@Override
+	public void delete(PessoaJuridica pessoaJuridica) {
+		em.createQuery("DELETE FROM PessoaJuridica e WHERE id=" + pessoaJuridica.getId()).executeUpdate();
+		if (em.contains(pessoaJuridica)){
+		     em.remove(pessoaJuridica);
+		}
+		
+	}
 	
 	
 }

@@ -70,17 +70,14 @@ public class PessoaFisicaBean implements Serializable {
 	}
 
 	public String editDadosPessoais(PessoaFisica pessoaFisica) {
-
-		//pessoaFisica = pessoaFisicaJpa.find(pessoaFisica);
-		System.out.println("pessoa " + pessoaFisica.getPessoa().getNome());
 		pessoa =pessoaFisica.getPessoa();
-		// pessoa = pessoaFisica.getPessoa();
-		// System.out.println(">>>>>>>>> " + pessoaFisica.getPessoa().getId());
 		return "/editPessoa.xhtml";
 	}
 
 	public String deleteAction(PessoaFisica pessoaFisica) {
-
+		pessoaFisicaJpa.delete(pessoaFisica);
+		listPessoaFisica.remove(pessoaFisica);
+		pessoaJpa.delete(pessoa);
 		return null;
 	}
 

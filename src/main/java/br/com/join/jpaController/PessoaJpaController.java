@@ -42,4 +42,13 @@ public class PessoaJpaController implements PessoaJpaControllerRemote {
 
 	}
 
+	@Override
+	public void delete(Pessoa pessoa) {
+		em.createQuery("DELETE FROM Pessoa e WHERE id=" + pessoa.getId()).executeUpdate();
+		if (em.contains(pessoa)){
+		     em.remove(pessoa);
+		}
+		
+	}
+
 }

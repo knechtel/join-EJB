@@ -11,4 +11,6 @@ public interface PessoaJpaControllerRemote {
 
 	public Pessoa findById(Integer id) ;
 	
+	public void delete(Pessoa pessoa);
+	
 }

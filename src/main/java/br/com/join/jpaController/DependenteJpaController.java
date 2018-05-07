@@ -44,4 +44,13 @@ public class DependenteJpaController implements DependenteJpaControllerRemote {
 
 		return dependente;
 	}
+
+	@Override
+	public void  delete(Dependente dependente) {
+		// TODO Auto-generated method stub
+		em.createQuery("DELETE FROM Dependente e WHERE id=" + dependente.getId()).executeUpdate();
+		if (em.contains(dependente)){
+		     em.remove(dependente);
+		}
+	}
 }

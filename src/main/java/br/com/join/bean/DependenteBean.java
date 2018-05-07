@@ -12,6 +12,7 @@ import br.com.join.entity.Dependente;
 import br.com.join.entity.PessoaFisica;
 import br.com.join.jpaController.DependenteJpaControllerRemote;
 import br.com.join.jpaController.PessoaFisicaJpaControllerRemote;
+import br.com.join.jpaController.PessoaJpaControllerRemote;
 
 @SessionScoped
 @Named("dependenteBean")
@@ -27,6 +28,8 @@ public class DependenteBean implements Serializable {
 	private Dependente dependente;
 	@EJB
 	private DependenteJpaControllerRemote dependenteJpa;
+	@EJB
+	private PessoaJpaControllerRemote pessoaJpa;
 	private List<Dependente> listDependente;
 
 	private Integer idPessoaFisica;
@@ -95,7 +98,12 @@ public class DependenteBean implements Serializable {
 		return null;
 	}
 
-	
+	public String delete(Dependente dependente) {
+		
+		listDependente.remove(dependente);
+		dependenteJpa.delete(dependente);
+		return null;
+	}
 
 	public Dependente getSelectDependente() {
 		return selectDependente;
